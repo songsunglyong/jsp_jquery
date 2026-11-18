@@ -54,7 +54,7 @@ $(function () {
         $('#order-count').text('전체 ' + data.orders.length + '건 중 ' + entries.length + '건 표시');
         renderRows('#order-rows', entries, 8, (order) => {
             const $action = $('<td>');
-            (actions[order.status] || []).forEach(([value, label]) => {
+            (order.demo ? actions[order.status] || [] : []).forEach(([value, label]) => {
                 $action.append($('<button>', { type: 'button', class: 'row-action', text: label })
                     .attr('aria-label', number(order) + ' ' + label).data({ id: order.id, status: value }));
             });

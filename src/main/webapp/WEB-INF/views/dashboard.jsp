@@ -27,7 +27,7 @@
         <p class="notice" id="notice" role="status" hidden></p>
         <section id="orders" class="page" aria-labelledby="orders-title">
             <div class="page-head">
-                <div><p class="eyebrow">01 / ORDER OPERATIONS</p><h1 id="orders-title">주문 관리</h1><p class="subtitle">대리점 주문을 등록하고 출고 진행 상태를 확인합니다.</p></div>
+                <div><p class="eyebrow">01 / ORDER OPERATIONS</p><h1 id="orders-title">주문 관리</h1><p class="subtitle">등록한 데모 주문은 7일 동안 보관됩니다. 기준 샘플 주문은 조회할 수 있습니다.</p></div>
                 <button type="button" class="primary" id="new-order">＋ 주문 등록</button>
             </div>
             <div class="metrics">

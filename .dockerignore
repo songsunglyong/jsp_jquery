@@ -1,0 +1,15 @@
+.git
+.codex
+.agents
+.aws
+.env
+.env.*
+target
+doc
+node_modules
+*.pem
+*.key
+.DS_Store
+**/._*
+backups
+releases

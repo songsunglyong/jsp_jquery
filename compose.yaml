@@ -1,0 +1,60 @@
+name: gamecha-jsp-demo
+services:
+  app:
+    build: .
+    image: gamecha-jsp-demo:local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:18080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/channel_desk
+      SPRING_DATASOURCE_USERNAME: channel_desk
+      SPRING_DATASOURCE_PASSWORD: ${CHANNEL_DB_PASSWORD:?Set CHANNEL_DB_PASSWORD}
+      SERVER_ADDRESS: 0.0.0.0
+      SERVER_PORT: "8080"
+      SERVER_FORWARD_HEADERS_STRATEGY: framework
+      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70
+    mem_limit: 512m
+    cpus: 1.0
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:8080/api/dashboard"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: channel_desk
+      MARIADB_USER: channel_desk
+      MARIADB_PASSWORD: ${CHANNEL_DB_PASSWORD:?Set CHANNEL_DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${CHANNEL_DB_ROOT_PASSWORD:?Set CHANNEL_DB_ROOT_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+volumes:
+  db-data:
