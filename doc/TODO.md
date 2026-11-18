@@ -18,3 +18,8 @@
 - [x] Spring Boot 4.1.2·Framework 7.0.10으로 전환하고 JSON·JSP·Docker 배포 검증
 - [x] 2026-11-17 실행 화면·작동 구조·데이터 모델·DB 확장 ERD를 포함한 제출용 DOCX 포트폴리오 작성 및 10쪽 렌더링 검증
 - [x] 2026-11-18 로컬 dev 프로필 구성 및 JSP·JS·CSS 저장 즉시 반영 검증
+
+## Java 보안 패치 · 2026-11-18
+
+- [x] 서버 Java를 Corretto 21.0.13.1.2로 패치하고 실제 JVM·HTTP 응답 확인
+- [x] 공식 AMD64·ARM64 체크섬과 패치 버전 검사를 Dockerfile에 반영
